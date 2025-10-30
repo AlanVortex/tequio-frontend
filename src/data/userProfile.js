@@ -1,5 +1,9 @@
 const userProfile = {
   name: 'Ariadna López',
+  username: 'ari_lopez',
+  email: 'ari.lopez@tequio.mx',
+  registeredAt: '12 de enero de 2023',
+  avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
   walletAddress: 'GA7RE3TEQUIO4WALLET8DEMO1ADDRESS6XLM9',
   balance: {
     lumens: '3,450.89 XLM',

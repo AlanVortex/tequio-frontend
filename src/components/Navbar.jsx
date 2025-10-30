@@ -9,6 +9,7 @@ const navLinks = [
   { to: '/explorar', label: 'Explorar Proyectos' },
   { to: '/comunidad', label: 'Comunidad y Recursos' },
   { to: '/simulador', label: 'Simulador de Valuación' },
+  { to: '/dashboard', label: 'Panel de Análisis' },
   { to: '/perfil', label: 'Perfil' },
 ];
 
@@ -16,8 +17,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const linkClasses = ({ isActive }) =>
-    `text-sm font-medium tracking-wide px-3 py-2 rounded-full transition-colors duration-200 ${
-      isActive ? 'bg-amber text-white' : 'text-slate hover:bg-agave/10'
+    `text-sm font-medium tracking-wide px-3 py-2 rounded-full transition-colors duration-200 ${isActive ? 'bg-amber text-white' : 'text-slate hover:bg-agave/10'
     }`;
 
   return (
@@ -25,9 +25,9 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <img 
-              src={logo} 
-              alt="Tequio Logo" 
+            <img
+              src={logo}
+              alt="Tequio Logo"
               className="h-10 w-auto"
             />
             <span className="font-semibold text-lg text-slate">Tequio</span>
@@ -39,10 +39,22 @@ const Navbar = () => {
               </NavLink>
             ))}
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              to="/login"
+              className="text-sm font-semibold text-slate hover:text-amber transition-colors"
+            >
+              Ingresar
+            </Link>
+            <Link
+              to="/registro"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-amber text-white font-semibold shadow-card hover:bg-amber/90"
+            >
+              Crear cuenta
+            </Link>
             <Link
               to="/simulador"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-amber text-white font-semibold shadow-card hover:bg-amber/90"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-agave/20 text-slate font-semibold shadow-card hover:bg-agave/30"
             >
               Comienza
             </Link>
@@ -63,8 +75,22 @@ const Navbar = () => {
               </NavLink>
             ))}
             <Link
-              to="/simulador"
+              to="/login"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-agave/20 text-slate font-semibold hover:bg-agave/30"
+              onClick={() => setOpen(false)}
+            >
+              Ingresar
+            </Link>
+            <Link
+              to="/registro"
               className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-amber text-white font-semibold shadow-card hover:bg-amber/90"
+              onClick={() => setOpen(false)}
+            >
+              Crear cuenta
+            </Link>
+            <Link
+              to="/simulador"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-agave/20 text-slate font-semibold hover:bg-agave/30"
               onClick={() => setOpen(false)}
             >
               Comienza

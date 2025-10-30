@@ -4,10 +4,28 @@ const projects = [
     name: 'Mercado Verde Xochimilco',
     category: 'Comercio local',
     location: 'Ciudad de México, MX',
+    community: 'Chinamperos de Xochimilco',
     impact: 'Conecta productores chinamperos con consumidores urbanos mediante pagos en XLM.',
+    impactType: 'Ambiental',
     fundingType: 'Microcrédito',
     isWeb3: true,
     image: 'https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=900&q=80',
+    description:
+      'Mercado Verde Xochimilco digitaliza cadenas de suministro agrícolas con contratos inteligentes que garantizan pagos justos y transparentes para productores chinamperos. El proyecto habilita preventas tokenizadas y logística sustentable para abastecer restaurantes y hogares en CDMX.',
+    entrepreneur: {
+      name: 'Itzel Morales',
+      region: 'Xochimilco, CDMX',
+    },
+    valuation: {
+      estimatedValue: '46,800 XLM',
+      risk: 'Bajo',
+      expectedReturn: '15% anual estimado',
+      suggestedInvestment: 'De 400 a 1,200 XLM',
+    },
+    impactHighlights: [
+      'Reducción del desperdicio agrícola en 27%',
+      'Programa educativo para productores sobre finanzas Web3',
+    ],
   },
   {
     id: 2,
