@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logo from '../assets/logoFixed.png';
 
 const navLinks = [
   { to: '/', label: 'Inicio' },
+  { to: '/about', label: 'Conocenos' },
   { to: '/explorar', label: 'Explorar Proyectos' },
+  { to: '/comunidad', label: 'Comunidad y Recursos' },
   { to: '/simulador', label: 'Simulador de Valuación' },
   { to: '/dashboard', label: 'Panel de Análisis' },
-  { to: '/comunidad', label: 'Comunidad y Recursos' },
-  { to: '/about', label: 'About' },
   { to: '/perfil', label: 'Perfil' },
 ];
 
