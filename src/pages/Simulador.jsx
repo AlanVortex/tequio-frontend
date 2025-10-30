@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import WizardSimulator from '../components/WizardSimulator.jsx';
 import ValuationResult from '../components/ValuationResult.jsx';
-import RegisterProjectWizard from '../components/RegisterProjectWizard.jsx';
 import simulatorResults from '../data/simulatorResults.js';
-import { useProjects } from '../context/ProjectContext.jsx';
 
 const evaluateProject = (data) => {
   const revenue = Number(data.monthlyRevenue || 0);
@@ -29,7 +27,6 @@ const evaluateProject = (data) => {
 };
 
 const Simulador = () => {
-  const { addProject } = useProjects();
   const [resultKey, setResultKey] = useState(null);
   const [inputData, setInputData] = useState(null);
 
@@ -37,10 +34,6 @@ const Simulador = () => {
     const key = evaluateProject(data);
     setResultKey(key);
     setInputData(data);
-  };
-
-  const handlePublish = (project) => {
-    addProject(project);
   };
 
   return (
@@ -55,13 +48,6 @@ const Simulador = () => {
       </section>
       <WizardSimulator onComplete={handleComplete} />
       <ValuationResult result={resultKey ? simulatorResults[resultKey] : null} input={inputData ?? {}} />
-      {resultKey && inputData ? (
-        <RegisterProjectWizard
-          initialData={inputData}
-          result={simulatorResults[resultKey]}
-          onPublish={handlePublish}
-        />
-      ) : null}
     </div>
   );
 };

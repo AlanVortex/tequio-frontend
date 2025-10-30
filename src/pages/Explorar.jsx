@@ -1,49 +1,32 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import ProjectCard from '../components/ProjectCard.jsx';
-import { useProjects } from '../context/ProjectContext.jsx';
+import projects from '../data/projects.js';
 
-const defaultFilters = {
-  category: 'Todas',
-  location: 'Todas',
-  type: 'Todos',
-  impact: 'Todos',
-};
+const categories = [
+  'Comercio local',
+  'Agrotech',
+  'Artesanías y manufactura',
+  'Servicios',
+  'Tecnología / Web3',
+  'Turismo y cultura',
+  'Educación',
+  'Salud comunitaria',
+  'Energía y reciclaje',
+];
+
+const fundingTypes = ['Microcrédito', 'Inversión'];
+
+const impacts = ['Ambiental', 'Social', 'Tecnológico'];
+
+const locations = ['CDMX', 'Oaxaca', 'Puebla', 'Mérida', 'Monterrey', 'Guadalajara', 'Veracruz', 'LATAM'];
 
 const Explorar = () => {
-  const { projects } = useProjects();
-  const [filters, setFilters] = useState(defaultFilters);
+  const [activeCategory, setActiveCategory] = useState('Todas');
 
-  const categories = useMemo(
-    () => ['Todas', ...new Set(projects.map((project) => project.category))],
-    [projects],
-  );
-  const locations = useMemo(
-    () => ['Todas', ...new Set(projects.map((project) => project.location))],
-    [projects],
-  );
-  const impactTypes = useMemo(
-    () => ['Todos', ...new Set(projects.map((project) => project.impactType))],
-    [projects],
-  );
-
-  const handleFilterChange = (name, value) => {
-    setFilters((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const visibleProjects = useMemo(() => {
-    return projects.filter((project) => {
-      const matchesCategory =
-        filters.category === 'Todas' || project.category === filters.category;
-      const matchesLocation =
-        filters.location === 'Todas' || project.location === filters.location;
-      const matchesType =
-        filters.type === 'Todos' || (filters.type === 'Web3' ? project.isWeb3 : !project.isWeb3);
-      const matchesImpact =
-        filters.impact === 'Todos' || project.impactType === filters.impact;
-
-      return matchesCategory && matchesLocation && matchesType && matchesImpact;
-    });
-  }, [projects, filters]);
+  const visibleProjects =
+    activeCategory === 'Todas'
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-10">
@@ -60,13 +43,22 @@ const Explorar = () => {
           <div>
             <h2 className="text-lg font-semibold text-slate">Categorías</h2>
             <div className="flex flex-wrap gap-2 mt-4">
+              <button
+                type="button"
+                onClick={() => setActiveCategory('Todas')}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                  activeCategory === 'Todas' ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
+                }`}
+              >
+                Todas
+              </button>
               {categories.map((category) => (
                 <button
                   key={category}
                   type="button"
-                  onClick={() => handleFilterChange('category', category)}
+                  onClick={() => setActiveCategory(category)}
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-                    filters.category === category ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
+                    activeCategory === category ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
                   }`}
                 >
                   {category}
@@ -76,48 +68,33 @@ const Explorar = () => {
           </div>
           <div>
             <h3 className="text-base font-semibold text-slate">Ubicación</h3>
-            <select
-              className="mt-3 w-full rounded-2xl border border-agave/30 bg-sand/40 px-4 py-2 text-sm text-slate focus:ring-2 focus:ring-agave"
-              value={filters.location}
-              onChange={(event) => handleFilterChange('location', event.target.value)}
-            >
+            <div className="flex flex-wrap gap-2 mt-3">
               {locations.map((location) => (
-                <option key={location} value={location}>
+                <span key={location} className="px-3 py-1 rounded-full bg-agave/15 text-xs font-semibold text-slate">
                   {location}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <h3 className="text-base font-semibold text-slate">Tipo de proyecto</h3>
-            <div className="flex gap-2 mt-3">
-              {['Todos', 'Web3', 'Web2'].map((type) => (
-                <button
-                  key={type}
-                  type="button"
-                  onClick={() => handleFilterChange('type', type)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors ${
-                    filters.type === type ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
-                  }`}
-                >
-                  {type}
-                </button>
+                </span>
               ))}
             </div>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-slate">Impacto social o ambiental</h3>
-            <select
-              className="mt-3 w-full rounded-2xl border border-agave/30 bg-sand/40 px-4 py-2 text-sm text-slate focus:ring-2 focus:ring-agave"
-              value={filters.impact}
-              onChange={(event) => handleFilterChange('impact', event.target.value)}
-            >
-              {impactTypes.map((impact) => (
-                <option key={impact} value={impact}>
-                  {impact}
-                </option>
+            <h3 className="text-base font-semibold text-slate">Tipo de financiamiento</h3>
+            <div className="flex flex-wrap gap-2 mt-3">
+              {fundingTypes.map((type) => (
+                <span key={type} className="px-3 py-1 rounded-full bg-agave/15 text-xs font-semibold text-slate">
+                  {type}
+                </span>
               ))}
-            </select>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-base font-semibold text-slate">Impacto</h3>
+            <div className="flex flex-wrap gap-2 mt-3">
+              {impacts.map((impact) => (
+                <span key={impact} className="px-3 py-1 rounded-full bg-agave/15 text-xs font-semibold text-slate">
+                  {impact}
+                </span>
+              ))}
+            </div>
           </div>
         </aside>
         <div className="space-y-6">
