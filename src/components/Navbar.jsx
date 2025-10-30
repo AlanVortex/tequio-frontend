@@ -17,7 +17,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const linkClasses = ({ isActive }) =>
-    `text-sm font-medium tracking-wide px-3 py-2 rounded-full transition-colors duration-200 ${isActive ? 'bg-amber text-white' : 'text-slate hover:bg-agave/10'
+    `text-sm font-medium tracking-wide px-3 py-2 rounded-full transition-colors duration-200 ${
+      isActive ? 'bg-amber text-white' : 'text-slate hover:bg-agave/10'
     }`;
 
   return (
@@ -25,11 +26,9 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <img
-              src={logo}
-              alt="Tequio Logo"
-              className="h-10 w-auto"
-            />
+            <div className="h-10 w-10 rounded-full bg-amber/90 text-white flex items-center justify-center font-bold shadow-card">
+              Tq
+            </div>
             <span className="font-semibold text-lg text-slate">Tequio</span>
           </Link>
           <div className="hidden lg:flex items-center gap-1">

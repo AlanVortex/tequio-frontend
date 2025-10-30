@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import WizardSimulator from '../components/WizardSimulator.jsx';
 import ValuationResult from '../components/ValuationResult.jsx';
 import RegisterProjectWizard from '../components/RegisterProjectWizard.jsx';
@@ -32,18 +32,35 @@ const Simulador = () => {
   const { addProject } = useProjects();
   const [resultKey, setResultKey] = useState(null);
   const [inputData, setInputData] = useState(null);
+  const [loadingResult, setLoadingResult] = useState(false);
+  const timeoutRef = useRef(null);
 
   const handleComplete = (data) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     const key = evaluateProject(data);
-    setResultKey(key);
     setInputData(data);
-  };
+    setResultKey(null);
+    setLoadingResult(true);
 
+    timeoutRef.current = setTimeout(() => {
+      setResultKey(key);
+      setLoadingResult(false);
+    }, 2000);
+  };
 
   const handlePublish = (project) => {
     addProject(project);
   };
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-10">
@@ -56,8 +73,16 @@ const Simulador = () => {
         </p>
       </section>
       <WizardSimulator onComplete={handleComplete} />
-      <ValuationResult result={resultKey ? simulatorResults[resultKey] : null} input={inputData ?? {}} />
-      {resultKey && inputData ? (
+      {loadingResult ? (
+        <div className="bg-white rounded-3xl shadow-card p-6 lg:p-8 flex items-center gap-4 justify-center">
+          <span className="h-12 w-12 rounded-full border-4 border-agave/20 border-t-amber animate-spin" aria-hidden />
+          <p className="text-base font-semibold text-slate">Simulando valuación Web3…</p>
+        </div>
+      ) : null}
+      {!loadingResult && resultKey ? (
+        <ValuationResult result={simulatorResults[resultKey]} input={inputData ?? {}} />
+      ) : null}
+      {!loadingResult && resultKey && inputData ? (
         <RegisterProjectWizard
           initialData={inputData}
           result={simulatorResults[resultKey]}

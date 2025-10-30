@@ -25,8 +25,8 @@ const Home = () => (
           </Link>
         </div>
       </div>
-      <div className="bg-white rounded-3xl shadow-card p-8 space-y-10 mb-4">
-        <h2 className="text-2xl font-semibold text-slate mb-4">Tequio impulsa proyectos locales</h2>
+      <div className="bg-white rounded-3xl shadow-card p-8 space-y-6">
+        <h2 className="text-2xl font-semibold text-slate">Tequio impulsa proyectos locales</h2>
         <p className="text-sm text-slate/80">
           Microinversiones transparentes, procesos respaldados por consultores certificados y trazabilidad en Stellar
           Testnet.

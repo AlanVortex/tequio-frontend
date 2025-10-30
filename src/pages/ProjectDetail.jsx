@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, MapPin, Users, Sparkles, Building } from 'lucide-react';
 import { useProjects } from '../context/ProjectContext.jsx';
@@ -12,6 +12,10 @@ const ProjectDetail = () => {
     [projects, projectId],
   );
   const [showValuation, setShowValuation] = useState(false);
+
+  useEffect(() => {
+    setShowValuation(false);
+  }, [projectId]);
 
   if (!project) {
     return (
@@ -34,6 +38,7 @@ const ProjectDetail = () => {
   }
 
   const ctaLabel = project.fundingType === 'Inversión' ? 'Invertir en este proyecto' : 'Solicitar microcrédito';
+  const metrics = project.metrics?.length ? project.metrics : project.impactHighlights ?? [];
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-10">
@@ -84,11 +89,11 @@ const ProjectDetail = () => {
             </div>
             <div className="bg-agave/10 rounded-2xl p-6 space-y-3">
               <h2 className="text-lg font-semibold text-slate flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-amber" /> Impacto social y ambiental
+                <Sparkles className="w-5 h-5 text-amber" /> Impacto y métricas verificadas
               </h2>
               <ul className="text-sm text-slate/70 space-y-2">
-                {project.impactHighlights?.length ? (
-                  project.impactHighlights.map((highlight) => (
+                {metrics.length ? (
+                  metrics.map((highlight) => (
                     <li key={highlight} className="flex items-start gap-2">
                       <span className="mt-1 h-2 w-2 rounded-full bg-amber" aria-hidden />
                       <span>{highlight}</span>

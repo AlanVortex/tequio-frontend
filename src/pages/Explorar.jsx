@@ -65,8 +65,9 @@ const Explorar = () => {
                   key={category}
                   type="button"
                   onClick={() => handleFilterChange('category', category)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${filters.category === category ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
-                    }`}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+                    filters.category === category ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
+                  }`}
                 >
                   {category}
                 </button>
@@ -95,8 +96,9 @@ const Explorar = () => {
                   key={type}
                   type="button"
                   onClick={() => handleFilterChange('type', type)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors ${filters.type === type ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
-                    }`}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors ${
+                    filters.type === type ? 'bg-amber text-white' : 'bg-agave/15 text-slate hover:bg-agave/25'
+                  }`}
                 >
                   {type}
                 </button>
@@ -132,7 +134,7 @@ const Explorar = () => {
           </div>
         </div>
       </section>
-    </div >
+    </div>
   );
 };
 
