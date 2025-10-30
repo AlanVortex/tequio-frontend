@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logo from '../assets/logoFixed.png';
 
 const navLinks = [
   { to: '/', label: 'Inicio' },
-  { to: '/about', label: 'About' },
+  { to: '/about', label: 'Conocenos' },
   { to: '/explorar', label: 'Explorar Proyectos' },
   { to: '/comunidad', label: 'Comunidad y Recursos' },
   { to: '/simulador', label: 'Simulador de Valuación' },
@@ -24,9 +25,11 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-full bg-amber/90 text-white flex items-center justify-center font-bold shadow-card">
-              Tq
-            </div>
+            <img 
+              src={logo} 
+              alt="Tequio Logo" 
+              className="h-10 w-auto"
+            />
             <span className="font-semibold text-lg text-slate">Tequio</span>
           </Link>
           <div className="hidden lg:flex items-center gap-1">
