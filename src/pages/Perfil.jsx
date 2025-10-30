@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import WalletSummary from '../components/WalletSummary.jsx';
 import userProfile from '../data/userProfile.js';
+import WalletConnect from '../components/WalletConnect.jsx';
 
 const Perfil = () => (
   <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-10">
@@ -26,6 +27,8 @@ const Perfil = () => (
           <p className="text-sm text-slate/70">Miembro desde: {userProfile.registeredAt}</p>
         </div>
       </div>
+      <WalletConnect/>
+
       <div className="bg-agave/10 rounded-2xl p-5 space-y-3 text-center md:text-right">
         <p className="text-sm font-semibold text-slate">
           En Tequio puedes invertir y también registrar tu proyecto

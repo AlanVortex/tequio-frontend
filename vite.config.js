@@ -3,4 +3,9 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    global: 'globalThis', // ✅ Evita el ReferenceError
+  },server: {
+    open: true, // Abre el navegador automáticamente al iniciar el servidor
+  },
 });
