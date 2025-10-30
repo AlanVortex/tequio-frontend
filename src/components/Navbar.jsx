@@ -5,11 +5,11 @@ import logo from '../assets/logoFixed.png';
 
 const navLinks = [
   { to: '/', label: 'Inicio' },
-  { to: '/about', label: 'Conocenos' },
-  { to: '/explorar', label: 'Explorar Proyectos' },
-  { to: '/comunidad', label: 'Comunidad y Recursos' },
-  { to: '/simulador', label: 'Simulador de Valuación' },
-  { to: '/dashboard', label: 'Panel de Análisis' },
+  { to: '/about', label: 'Nosotros' },
+  { to: '/explorar', label: 'Proyectos' },
+  { to: '/comunidad', label: 'Comunidad' },
+  { to: '/simulador', label: 'Simulador' },
+  { to: '/dashboard', label: 'Dashboard' },
   { to: '/perfil', label: 'Perfil' },
 ];
 
@@ -17,8 +17,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const linkClasses = ({ isActive }) =>
-    `text-sm font-medium tracking-wide px-3 py-2 rounded-full transition-colors duration-200 ${
-      isActive ? 'bg-amber text-white' : 'text-slate hover:bg-agave/10'
+    `text-sm font-medium tracking-wide px-3 py-2 rounded-full transition-colors duration-200 ${isActive ? 'bg-amber text-white' : 'text-slate hover:bg-agave/10'
     }`;
 
   return (
@@ -26,9 +25,11 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-full bg-amber/90 text-white flex items-center justify-center font-bold shadow-card">
-              Tq
-            </div>
+            <img
+              src={logo}
+              alt="Tequio Logo"
+              className="h-10 w-auto"
+            />
             <span className="font-semibold text-lg text-slate">Tequio</span>
           </Link>
           <div className="hidden lg:flex items-center gap-1">
